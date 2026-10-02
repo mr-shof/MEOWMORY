@@ -1,0 +1,206 @@
+[gd_scene format=4 uid="uid://dre03uw5qqhdd"]
+
+[ext_resource type="Script" uid="uid://cv6dqklxdi31b" path="res://scripts/Level1.gd" id="1_mlbie"]
+[ext_resource type="Script" uid="uid://ciwi8d37w6xoo" path="res://scripts/player.gd" id="2_mlbie"]
+[ext_resource type="Texture2D" uid="uid://c7ik72pxx8ldo" path="res://assets/Cat1.png" id="3_s3sxq"]
+[ext_resource type="Script" uid="uid://bm172vumw1ed4" path="res://scripts/home.gd" id="4_5py54"]
+[ext_resource type="Texture2D" uid="uid://ctb0j03jbuida" path="res://assets/Home.png" id="5_1bjei"]
+[ext_resource type="Texture2D" uid="uid://hy67xuqbuwly" path="res://assets/Cat3.png" id="5_s3sxq"]
+[ext_resource type="Texture2D" uid="uid://djdb80hlv8ogh" path="res://assets/Cat5.png" id="6_5py54"]
+[ext_resource type="Texture2D" uid="uid://dggfx8ksujyde" path="res://assets/Wall.png" id="6_lmyl5"]
+[ext_resource type="Texture2D" uid="uid://b5r58334n8oor" path="res://assets/White.png" id="7_mlbie"]
+[ext_resource type="AudioStream" uid="uid://c4bwsb770ckd1" path="res://sounds/Walk.mp3" id="10_g56ap"]
+[ext_resource type="AudioStream" uid="uid://dy4tmqx1hx2jw" path="res://sounds/Win.mp3" id="11_na6ls"]
+[ext_resource type="AudioStream" uid="uid://b53o8idlkf20k" path="res://sounds/FailPanel.mp3" id="12_fjxbk"]
+[ext_resource type="AudioStream" uid="uid://cbk8egghde730" path="res://sounds/Click.mp3" id="13_g56ap"]
+[ext_resource type="AudioStream" uid="uid://dfwed3e3ta22o" path="res://sounds/Bonk.mp3" id="14_jl3d8"]
+[ext_resource type="AudioStream" uid="uid://cloxuhcupxwbq" path="res://sounds/Countdown (mp3cut.net).mp3" id="15_g56ap"]
+[ext_resource type="AudioStream" uid="uid://bk3ypvybkxlkl" path="res://sounds/Cat Happy.mp3" id="16_e0n1a"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s3sxq"]
+texture = ExtResource("7_mlbie")
+texture_region_size = Vector2i(96, 96)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_tojuf"]
+tile_size = Vector2i(96, 96)
+sources/0 = SubResource("TileSetAtlasSource_s3sxq")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_edgsp"]
+size = Vector2(42, 61)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qyi84"]
+size = Vector2(66, 78)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mlbie"]
+texture = ExtResource("6_lmyl5")
+texture_region_size = Vector2i(96, 96)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-48, -48, 48, -48, 48, 48, -48, 48)
+
+[sub_resource type="TileSet" id="TileSet_edgsp"]
+tile_size = Vector2i(96, 96)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_mlbie")
+
+[node name="Game" type="Node2D" unique_id=515927978]
+script = ExtResource("1_mlbie")
+
+[node name="Background" type="TileMapLayer" parent="." unique_id=97188178]
+tile_map_data = PackedByteArray("AAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAABAAMAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAADAAMAAAAAAAAAAAADAAIAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAIAAMAAAAAAAAAAAAIAAIAAAAAAAAAAAAIAAEAAAAAAAAAAAAHAAEAAAAAAAAAAAAHAAIAAAAAAAAAAAAHAAMAAAAAAAAAAAAEAAIAAAAAAAAAAAACAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAABAAUAAAAAAAAAAAACAAUAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAMAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAAIAAUAAAAAAAAAAAAJAAUAAAAAAAAAAAAJAAQAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAIAAAAAAAAAAAAJAAEAAAAAAAAAAAAJAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAADAAAAAAAAAAAAAAACAAAAAAAAAAAAAAACAAIAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_tojuf")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=551428550]
+position = Vector2(75, 75)
+script = ExtResource("2_mlbie")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=795913467]
+position = Vector2(69, 69)
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("3_s3sxq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=575208471]
+position = Vector2(67, 77.5)
+shape = SubResource("RectangleShape2D_edgsp")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1135717148]
+
+[node name="WinPanel" type="Panel" parent="UI" unique_id=405035488]
+visible = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="WinLabel" type="Label" parent="UI/WinPanel" unique_id=2024163516]
+layout_mode = 0
+offset_right = 960.0
+offset_bottom = 576.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 24
+theme_override_font_sizes/font_size = 48
+text = "
+
+LEVEL COMPLETED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="Button" parent="UI/WinPanel" unique_id=1007636235]
+propagate_maximum_size = true
+layout_mode = 0
+offset_left = 388.0
+offset_top = 395.0
+offset_right = 553.0
+offset_bottom = 442.0
+theme_override_font_sizes/font_size = 26
+text = "NEXT LEVEL"
+
+[node name="HappyCat" type="TextureRect" parent="UI/WinPanel" unique_id=1389578319]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 96.0
+offset_right = 1148.0
+offset_bottom = 864.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_s3sxq")
+
+[node name="CountdownLabel" type="Label" parent="UI" unique_id=764565049]
+propagate_maximum_size = true
+offset_right = 958.0
+offset_bottom = 540.0
+theme_override_colors/font_shadow_color = Color(0.9882353, 0.9882353, 0.9882353, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 18
+theme_override_font_sizes/font_size = 64
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FailPanel" type="Panel" parent="UI" unique_id=1327573825]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/FailPanel" unique_id=1412547883]
+layout_mode = 0
+offset_top = 30.0
+offset_right = 960.0
+offset_bottom = 576.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 24
+theme_override_font_sizes/font_size = 48
+text = "
+FAILED!
+YOU HIT THE WALL!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RetryButton" type="Button" parent="UI/FailPanel" unique_id=924619688]
+layout_mode = 0
+offset_left = 450.0
+offset_top = 444.0
+offset_right = 506.0
+offset_bottom = 475.0
+text = "RETRY"
+
+[node name="FailCat" type="TextureRect" parent="UI/FailPanel" unique_id=204373853]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 62.0
+offset_right = 1148.0
+offset_bottom = 830.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("6_5py54")
+
+[node name="Map" type="Node2D" parent="." unique_id=223837053]
+
+[node name="Home" type="Area2D" parent="Map" unique_id=1887751129]
+position = Vector2(817, 144)
+script = ExtResource("4_5py54")
+
+[node name="Sprite2D" type="Sprite2D" parent="Map/Home" unique_id=1401334186]
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("5_1bjei")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Home" unique_id=436639059]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_qyi84")
+
+[node name="Walls" type="TileMapLayer" parent="Map" unique_id=271307073]
+tile_map_data = PackedByteArray("AAAJAAUAAAAAAAAAAAAIAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAADAAUAAAAAAAAAAAACAAUAAAAAAAAAAAABAAUAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAJAAEAAAAAAAAAAAAJAAIAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAQAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_edgsp")
+
+[node name="CountdownTimer" type="Timer" parent="." unique_id=1076301379]
+
+[node name="MoveSound" type="AudioStreamPlayer2D" parent="." unique_id=615369705]
+stream = ExtResource("10_g56ap")
+
+[node name="CompleteSound" type="AudioStreamPlayer2D" parent="." unique_id=1722721352]
+stream = ExtResource("11_na6ls")
+
+[node name="FailSound" type="AudioStreamPlayer2D" parent="." unique_id=329981564]
+stream = ExtResource("12_fjxbk")
+volume_db = -5.0
+
+[node name="ClickSound" type="AudioStreamPlayer2D" parent="." unique_id=175708686]
+stream = ExtResource("13_g56ap")
+volume_db = 5.0
+
+[node name="BonkSound" type="AudioStreamPlayer2D" parent="." unique_id=248536063]
+stream = ExtResource("14_jl3d8")
+
+[node name="CountdownSound" type="AudioStreamPlayer2D" parent="." unique_id=478756333]
+stream = ExtResource("15_g56ap")
+autoplay = true
+
+[node name="HappySound" type="AudioStreamPlayer2D" parent="." unique_id=10417306]
+stream = ExtResource("16_e0n1a")
+
+[connection signal="pressed" from="UI/WinPanel/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="UI/FailPanel/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="body_entered" from="Map/Home" to="Map/Home" method="_on_body_entered"]
+[connection signal="timeout" from="CountdownTimer" to="." method="_on_countdown_timer_timeout"]

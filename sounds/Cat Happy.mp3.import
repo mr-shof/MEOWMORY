@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bk3ypvybkxlkl"
+path="res://.godot/imported/Cat Happy.mp3-529642acf3d36c7f01f712dc9fee6ecc.mp3str"
+
+[deps]
+
+source_file="res://sounds/Cat Happy.mp3"
+dest_files=["res://.godot/imported/Cat Happy.mp3-529642acf3d36c7f01f712dc9fee6ecc.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
